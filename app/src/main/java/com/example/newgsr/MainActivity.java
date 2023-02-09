@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                startActivity(enableBT);
+                startActivityForResult(enableBT,BT_ENABLE_REQUEST);
+
             } else {
                 new SearchDevices().execute();
             }
@@ -130,12 +131,17 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case BT_ENABLE_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    msg("Bluetooth Enabled successfully");
+                    Log.d("","InputStream is null");
+                  //  msg("Bluetooth Enabled successfully");
+
+                    Toast.makeText(getApplicationContext(), "Bluetooth Enabled successfully", Toast.LENGTH_LONG).show();
                     new SearchDevices().execute();
+
                 } else {
                     msg("Bluetooth couldn't be enabled");
                 }
                 break;
+
 
             case SETTINGS: //If the settings have been updated
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -328,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.homescreen, menu);
+        getMenuInflater().inflate(R.menu.homescreen, menu);
         return true;
     }
 
